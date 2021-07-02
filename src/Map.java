@@ -101,7 +101,7 @@ public class Map<K, V> implements java.util.Map<K, V> {
     public Collection<V> values() {
         Collection<V> arrValues = new ArrayList<>();
         for(Node<K, V> node : arrNode){
-           arrValues.add((V) node.getValue());
+           arrValues.add(node.getValues());
         }
         return arrValues;
     }
