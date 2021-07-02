@@ -1,14 +1,11 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Node <K, V>{
 
     private final LinkedList<Data<K, V>> list = new LinkedList<>();
-
-    public Node(K key, V value) {
-        list.add(new Data(key, value));
-    }
 
     public Node() {
     }
@@ -43,6 +40,14 @@ public class Node <K, V>{
             }
         return false;
         }
+
+        public Map.Entry<K, V> returnEntryMap(){
+        for(Data<K, V> data : list){
+            return data;
+        }
+        return null;
+    }
+
 
 
 

@@ -8,7 +8,7 @@ public class Map<K, V> implements java.util.Map<K, V> {
     public Map() {
         arrNode = new ArrayList<>();
         for (int i = 0; i<10; i++){
-        arrNode.add(new Node());
+        arrNode.add(new Node<>());
         }
     }
 
@@ -108,13 +108,12 @@ public class Map<K, V> implements java.util.Map<K, V> {
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-//        Set<Entry<K, V>> listEntry = new LinkedHashSet<>();
-//        for (Node<K, V> node : arrNode){
-//            listEntry.add(node);
-//        }
-////        return new LinkedHashSet<>(Arrays.asList(arrNode));
-//        return listEntry;
-        return null;
+        Set<Entry<K, V>> listEntry = new LinkedHashSet<>();
+        for (Node<K, V> node : arrNode){
+            listEntry.add(node.returnEntryMap());
+        }
+        return listEntry;
+
     }
 
     public String toString(){
