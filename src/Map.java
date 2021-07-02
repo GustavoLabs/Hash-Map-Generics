@@ -3,7 +3,7 @@ import java.util.*;
 public class Map<K, V> implements java.util.Map<K, V> {
 
 
-    ArrayList<Node<K, V>> arrNode;
+    private final ArrayList<Node<K, V>> arrNode;
 
     public Map() {
         arrNode = new ArrayList<>();

@@ -2,7 +2,7 @@ import java.util.Map;
 
 public class Data<K, V> implements Map.Entry<K,V> {
 
-        private K key;
+        private final K key;
         private V value;
 
         public Data(K key, V value) {
@@ -18,11 +18,7 @@ public class Data<K, V> implements Map.Entry<K,V> {
             return key;
         }
 
-        public void setKey(K key) {
-            this.key = key;
-        }
-
-        public V getValue() {
+    public V getValue() {
             return value;
         }
 
