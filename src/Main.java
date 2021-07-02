@@ -18,29 +18,14 @@ public class Main {
         map.put(10, "caique");
         map.put('g', 8.2);
 
-//        System.out.println(map);
-//        System.out.println(map.values());
-//        System.out.println(map.keySet());
-//        System.out.println(map.size());
-//        System.out.println(map.entrySet());
-//        System.out.println(map.keySet());
-//        map.clear();
-//        System.out.println(map);
 
-        System.out.println(map.containsKey(0) + "--------------------------");
-        System.out.println(map.containsValue("8.2"));
-        System.out.println(map.entrySet());
-//
-//        System.out.println(map.keySet());
-//
-//        System.out.println(map.values());
-//
-//        System.out.println(map);
-//
-//        System.out.println(map.size());
-//
-//        System.out.println(map.containsKey(4));
-//
-//        System.out.println(map.containsValue(5.3));
+        System.out.println("\t Map Size:" + map.size());
+        System.out.println("\t Map keys: " + map.keySet());
+        System.out.println("\t Map values: " + map.values());
+        System.out.println("\t Map entrySet: " + map.entrySet());
+        System.out.println("\t Map contains key 'g' ? " + map.containsKey('g') );
+        System.out.println("\t Map contains value caique?" +  map.containsValue("caique"));
+        System.out.println("\t Map: ");
+        System.out.println(map);
     }
 }
