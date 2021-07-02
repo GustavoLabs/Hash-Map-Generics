@@ -91,11 +91,16 @@ public class Node <K, V>{
 
     }
 
-    public Collection<V> getValue() {
-        Collection<V> v = new ArrayList<>();
+    public V getValues() {
+        Collection<V> collectionValues = new ArrayList<>();
         for ( Data<K, V> data : list){
-            v.add(data.getValue());
+            collectionValues.add(data.getValue());
         }
-        return v;
+        for (V v: collectionValues){
+            if (v != null){
+                return v;
+            }
+        }
+        return null;
     }
 }
