@@ -1,38 +1,34 @@
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
-public class Node <K, V> implements Map.Entry<K,V> {
+public class Node <K, V>{
 
-     protected K key;
-     protected V value;
-
-    private final List<Node<K, V>> list = new LinkedList<>();
+    private final LinkedList<Data<K, V>> list = new LinkedList<>();
 
     public Node(K key, V value) {
-        this.key = key;
-        this.value = value;
+        list.add(new Data(key, value));
     }
 
     public Node() {
     }
 
     public void add(K key, V value){
-        list.add(new Node<>(key, value));
+        list.add(new Data<>(key, value));
     }
 
-    public V get(K key){
-        for(Node<K, V> node : list){
-            if (node.key == key){
-                return node.value;
+    public V get(Object key){
+        for(Data<K, V> data : list){
+            if (data.getKey() == key){
+                return data.getValue();
             }
         }
         return null;
     }
 
     public boolean containsKey(Object key){
-        for(Node<K, V> node : list){
-            if (node.getKey() == key){
+        for(Data<K, V> data : list){
+            if (data.getKey() == key){
                 return true;
             }
         }
@@ -40,8 +36,8 @@ public class Node <K, V> implements Map.Entry<K,V> {
     }
 
     public boolean containsValue(Object value){
-        for(Node<K, V> node : list){
-             if (node.getValue() == value){
+        for(Data<K, V> data : list){
+             if (data.getValue() == value){
                  return true;
              }
             }
@@ -54,44 +50,47 @@ public class Node <K, V> implements Map.Entry<K,V> {
         return list.size();
     }
 
-    public void setKey(K key) {
-        this.key = key;
+
+
+    public ArrayList<K> getKey(){
+        ArrayList<K> k = new ArrayList<>();
+        for (Data<K, V> data : list){
+           k.add(data.getKey());
+        }
+        return k;
     }
 
     public  void remove(Object key){
-        list.removeIf(node -> node.key == key);
+        list.removeIf(data -> data.getKey() == key);
     }
 
     public String toString(){
         StringBuilder result = new StringBuilder();
-        for (Node<K,V> node : list){
-            result.append(node.nodeToString()).append(" ");
+        for (Data<K,V> data : list){
+            result.append(data).append(" ");
         }
         return result.toString();
     }
 
-    @Override
-    public final K getKey(){
-        return key;
-    }
-
-    @Override
-    public final V getValue(){
-        return value;
-    }
-
-    public final String nodeToString(){
-        return key + "=" + value;
-    }
-
-    @Override
-    public final V setValue(V newValue) {
-        V oldValue = value;
-        value = newValue;
-        return oldValue;
-    }
 
     public void clear() {
         list.clear();
+    }
+
+    public void setValue(K key, V value) {
+        for(Data<K, V> data : list){
+            if (data.getKey() == key){
+                data.setValue(value);
+            }
+        }
+
+    }
+
+    public Collection<V> getValue() {
+        Collection<V> v = new ArrayList<>();
+        for ( Data<K, V> data : list){
+            v.add(data.getValue());
+        }
+        return v;
     }
 }

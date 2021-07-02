@@ -2,14 +2,18 @@ import java.util.*;
 
 public class Map<K, V> implements java.util.Map<K, V> {
 
-    Node<K, V>[] arrNode;
+
+    ArrayList<Node<K, V>> arrNode;
 
     public Map() {
-        arrNode = new Node[10];
+        arrNode = new ArrayList<>();
+        for (int i = 0; i<10; i++){
+        arrNode.add(new Node());
+        }
     }
 
     public int hashPosition(Object key){
-        return Objects.hash(key) % 10;
+        return (Objects.hash(key)) % 10;
     }
 
 
@@ -30,7 +34,9 @@ public class Map<K, V> implements java.util.Map<K, V> {
     @Override
     public boolean containsKey(Object key) {
         for (Node<K, V> node : arrNode){
-            return node.containsKey(key);
+            if (node.containsKey(key)){
+            return true;
+            }
         }
         return false;
     }
@@ -38,8 +44,8 @@ public class Map<K, V> implements java.util.Map<K, V> {
     @Override
     public boolean containsValue(Object value) {
         for (Node<K, V> node : arrNode){
-            if (node.getValue() == value) {
-                return node.containsValue(value);
+            if (node.containsValue(value)) {
+                return true;
             }
         }
         return false;
@@ -48,27 +54,24 @@ public class Map<K, V> implements java.util.Map<K, V> {
     @Override
     public V get(Object key) {
         int position = hashPosition(key);
-        return arrNode[position].getValue();
+        return arrNode.get(position).get(key);
     }
 
     @Override
     public V put(K key, V value) {
         int position = hashPosition(key);
-        if (arrNode[position] == null){
-            arrNode[position] = new Node<>();
-        }
-        if (arrNode[position].get(key) == null) {
-            arrNode[position].add(key, value);
+        if (arrNode.get(position).get(key) == null) {
+            arrNode.get(position).add(key, value);
         } else {
-            arrNode[position].setValue(value);
+            arrNode.get(position).setValue(key, value);
         }
-        return arrNode[position].getValue();
+        return arrNode.get(position).get(key);
     }
 
     @Override
     public V remove(Object key) {
         int position = hashPosition(key);
-        arrNode[position].remove(key);
+        arrNode.get(position).remove(key);
         return null;
     }
 
@@ -88,9 +91,9 @@ public class Map<K, V> implements java.util.Map<K, V> {
     @Override
     public Set<K> keySet() {
         Set<K> keyList = new LinkedHashSet<>();
-        for(Node<K, V> node : arrNode){
-            keyList.add(node.key);
-        }
+       for(Node<K, V> node : arrNode){
+           keyList.addAll(node.getKey());
+    }
         return keyList;
     }
 
@@ -98,14 +101,20 @@ public class Map<K, V> implements java.util.Map<K, V> {
     public Collection<V> values() {
         Collection<V> arrValues = new ArrayList<>();
         for(Node<K, V> node : arrNode){
-            arrValues.add(node.value);
+           arrValues.add((V) node.getValue());
         }
         return arrValues;
     }
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return new LinkedHashSet<>(Arrays.asList(arrNode));
+//        Set<Entry<K, V>> listEntry = new LinkedHashSet<>();
+//        for (Node<K, V> node : arrNode){
+//            listEntry.add(node);
+//        }
+////        return new LinkedHashSet<>(Arrays.asList(arrNode));
+//        return listEntry;
+        return null;
     }
 
     public String toString(){
