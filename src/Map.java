@@ -1,19 +1,15 @@
 import java.util.*;
 
-public final class Map<K, V> implements java.util.Map<K, V> {
+public class Map<K, V> implements java.util.Map<K, V> {
 
-    private static final Map MAP = new Map();
+
     private final ArrayList<Node<K, V>> arrNode;
 
-    private Map() {
+    public Map() {
         arrNode = new ArrayList<>();
         for (int i = 0; i<10; i++){
         arrNode.add(new Node<>());
         }
-    }
-
-    public static Map getInstance(){
-        return MAP;
     }
 
     public int hashPosition(Object key){
