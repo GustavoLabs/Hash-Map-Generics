@@ -2,7 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Map map = new Map();
+        Map map = Map.getInstance();
 
         map.put(0, "gustavo");
         map.put(1, "123154");
